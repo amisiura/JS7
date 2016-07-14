@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    input,textarea{
+        margin-bottom: 10px;
+        display: block;
+    }
+</style>
+<form name="myForm" id="myForm" action="" method="get">
+    <input type="text" data-toggle="tooltip" title="Введите имя" name="first name" required class="form-control" placeholder="First name">
+    <input type="text" name="second name" class="form-control" data-toggle="tooltip" title="Введите фамилию" placeholder="Second name">
+    <input type="text" name="phone" data-toggle="tooltip" title="Введите номер телефона в формате +380XX-XXX-XX-XX"  pattern="^\+380\d{2}-\d{3}-\d{2}-\d{2}$" class="form-control" placeholder="Telephone">
+
+    <input type="radio" name="gender" value="female" id="female">
+    <label for="female">Female</label>
+
+    <input type="radio" name="gender" value="male" id="male">
+    <label for="male">Male</label>
+
+<textarea name="message" id="message" maxlength="30" class="form-control" cols="30" rows="10" placeholder="111">
+Please enter a message
+</textarea>
+
+    <button class="btn btn-success">Submit</button>
+</form>
+<script>
+var t=document.querySelector('input[name="phone"]')
+t.addEventListener('change',
+function () {
+
+    pt=t.value;
+    r=pt.match(/^\+380\d{2}-\d{3}-\d{2}-\d{2}$/);
+    if (t.value !== r[0])
+    {t.className+=' error'}
+
+}
+)
+
+
+////////////////////////////////////
+
+myForm.addEventListener('submit', function(e){
+            getFormData(this);
+            e.preventDefault();
+            return false;
+            myform.elements[0].name;
+        }
+)
+
+function getFormData(form) {
+    var elemList=form.elements,
+    dataObj={};
+
+    for (i=0, len=elemList.length; i<(len-1);i++)
+    {
+        var name = elemList[i].name;
+        var value = elemList[i].value;
+
+        dataObj[name]=value;
+    }
+    //alert('First name:' + dataObj['first name']+';   '+'Second Name:'+dataObj['second name']+';   '+'Phone:'+dataObj['phone']+';   '+'Gender'+dataObj['gender']+';   '+'Message'+dataObj['message']+'.');
+
+    var arr=[];
+    for (key in dataObj) {
+
+        arr.push(key);
+    }
+    alert(arr);
+
+
+
+      // console.log(elemList);
+}
+
+
+</script>
+
+</body>
+</html>
